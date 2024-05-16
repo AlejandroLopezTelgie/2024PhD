@@ -1,0 +1,97 @@
+
+   ("The total number of points inside the region are: " + PointGroup2.Count.ToString)
+                                           None
+                 The total number of points inside the region are: 40984
+
+   ((@"Propagating constellation for: " + analysisDuration.ToString) + " day(s)")
+                                        None
+                      Propagating constellation for: 30 day(s)
+
+   ("Type of Orbit: " + TypeOfOrbit)
+                  None
+          Type of Orbit: ISS
+
+   ("Semimajor Axis: " + F_axis.ToString)
+                    None
+            Semimajor Axis: 6728
+
+   ("Inclination: " + F_inclination.ToString.Format("%5.2f"))
+                              None
+                       Inclination: 51.64
+
+   ("Half Width: " + HalfWidth.ToString.Format("%5.2f"))
+                            None
+                     Half Width: 13.00
+
+   ("R_GSD implemented: " + R_GSD.ToString)
+                     None
+            R_GSD implemented: 25
+
+   (((CovPercentage.ToString.Format("%5.2f") + "% was covered") + i.ToString) + " times")
+                                            None
+                                  0.00% was covered18 times
+                                  0.02% was covered19 times
+                                  0.02% was covered20 times
+                                  0.06% was covered21 times
+                                  0.10% was covered22 times
+                                  0.22% was covered23 times
+                                  0.39% was covered24 times
+                                  0.70% was covered25 times
+                                  1.16% was covered26 times
+                                  1.77% was covered27 times
+                                  2.61% was covered28 times
+                                  3.23% was covered29 times
+                                  4.01% was covered30 times
+                                  4.47% was covered31 times
+                                  4.75% was covered32 times
+                                  5.18% was covered33 times
+                                  5.12% was covered34 times
+                                  5.20% was covered35 times
+                                  5.02% was covered36 times
+                                  4.95% was covered37 times
+                                  4.35% was covered38 times
+                                  4.03% was covered39 times
+                                  3.42% was covered40 times
+                                  3.21% was covered41 times
+                                  3.05% was covered42 times
+                                  2.73% was covered43 times
+                                  2.50% was covered44 times
+                                  2.36% was covered45 times
+                                  2.26% was covered46 times
+                                  2.30% was covered47 times
+                                  2.06% was covered48 times
+                                  2.10% was covered49 times
+                                  2.17% was covered50 times
+                                  2.09% was covered51 times
+                                  1.65% was covered52 times
+                                  1.65% was covered53 times
+                                  1.51% was covered54 times
+                                  1.26% was covered55 times
+                                  0.98% was covered56 times
+                                  0.78% was covered57 times
+                                  0.80% was covered58 times
+                                  0.55% was covered59 times
+                                  0.55% was covered60 times
+                                  0.44% was covered61 times
+                                  0.33% was covered62 times
+                                  0.34% was covered63 times
+                                  0.27% was covered64 times
+                                  0.20% was covered65 times
+                                  0.20% was covered66 times
+                                  0.20% was covered67 times
+                                  0.13% was covered68 times
+                                  0.12% was covered69 times
+                                  0.11% was covered70 times
+                                  0.10% was covered71 times
+                                  0.07% was covered72 times
+                                  0.07% was covered73 times
+                                  0.02% was covered74 times
+                                  0.01% was covered75 times
+                                  0.03% was covered76 times
+                                  0.02% was covered77 times
+                                  0.00% was covered78 times
+                                  0.01% was covered79 times
+
+   ((@"This simulation's Temporal Resolution: " + TemporalRes.ToString.Format("%5.2f")) + "[#/days]")
+                                                  None
+                          This simulation's Temporal Resolution:  1.32[#/days]
