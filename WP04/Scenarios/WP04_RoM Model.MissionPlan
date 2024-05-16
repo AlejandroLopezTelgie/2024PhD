@@ -4657,6 +4657,24 @@
         <metadata dim="0" />
       </Variable>
     </Object>
+    <Object>
+      <Array name="averagetimebetweenvisits" isConstant="false" isGlobal="false">
+        <Name>averagetimebetweenvisits</Name>
+        <Dimension units="" displayed_units="">0</Dimension>
+        <Capacity units="" displayed_units="">0</Capacity>
+        <Element units="" displayed_units="" dim="(0)" />
+        <metadata dim="0" />
+      </Array>
+    </Object>
+    <Object>
+      <Array name="maxaveragetime" isConstant="false" isGlobal="false">
+        <Name>maxaveragetime</Name>
+        <Dimension units="" displayed_units="">0</Dimension>
+        <Capacity units="" displayed_units="">0</Capacity>
+        <Element units="" displayed_units="" dim="(0)" />
+        <metadata dim="0" />
+      </Array>
+    </Object>
   </ProjectObjects>
   <ProjectMissionSequence>
     <ProjectExternals />
@@ -4667,13 +4685,13 @@
         <Breakpoints />
         <FreeFormScript><![CDATA[// Input variables to be set by the user. These define the cluster and simulation's configuration.
 
-String TypeOfOrbit = "SSO";
+String TypeOfOrbit = "ISS";
 Variable F_axis = 6978; //[km] keplerian semi major axis
 Variable F_inclination = 97.87; //[°] keplerian orbit inclination
-Variable F_SCamount = 5; // Amount of satellites in the cluster
+Variable F_SCamount = 8; // Amount of satellites in the cluster
 Variable HalfWidth = 15.07; //[°] Half width angle
 Variable R_GSD = 50; // [m]
-Variable analysisDuration = 30; //[days] simulation runtime]]></FreeFormScript>
+Variable analysisDuration = 2; //[days] simulation runtime]]></FreeFormScript>
       </FreeForm>
       <FreeForm enabled="true" comment="Creates the formation, the values of some variables are defined in Variable">
         <Label>Formation</Label>
@@ -4939,7 +4957,7 @@ String Report_Sim = "Sim_" + F_SCamount.ToString() + "_" + TypeOfOrbit + "_" + F
                       <RHS>
                         <TimeSpanConstant name="Command7_:Condition_:RHS_:Condition_:RHS" isConstant="false" isGlobal="false">
                           <Name>Command7_:Condition_:RHS_:Condition_:RHS</Name>
-                          <value>30</value>
+                          <value>2</value>
                           <Units>days</Units>
                           <metadata dim="0" />
                         </TimeSpanConstant>
@@ -5040,7 +5058,10 @@ Variable CovPercentage;
 
 
 
-revisit = totalNumberofRevisits[0:PointGroup2.Count-1];
+revisit = totalNumberofRevisits[0:PointGroup2.Count-1]; // https://ai-solutions.com/_help_Files/pointgroup_coverage_2_nanosecond.htm using statistics #1
+averagetimebetweenvisits = totalNumberofRevisits[PointGroup2.Count:2*PointGroup2.Count-1]; // https://ai-solutions.com/_help_Files/pointgroup_coverage_2_nanosecond.htm using statistics # 2
+maxaveragetime = totalNumberofRevisits[4*PointGroup2.Count:5*PointGroup2.Count-1]; // https://ai-solutions.com/_help_Files/pointgroup_coverage_2_nanosecond.htm using statistics #5
+
 
 ReportInterface Sim_Report;
 
@@ -5064,32 +5085,37 @@ For i=revisit.Min to revisit.Max;
 		End;
 	End;
 	CovPercentage = counter / PointGroup2.Count * 100;
-	Report CovPercentage.ToString.Format("%5.2f") +  "% was covered " + i.ToString() + " times" to Console;
-	Report CovPercentage.ToString.Format("%5.2f") +  "% was covered " + i.ToString() + " times" to Sim_Report;
+	
+	Report CovPercentage.ToString.Format("%5.4f") +  "% was covered " + i.ToString() + " times" to Console;
+	Report CovPercentage.ToString.Format("%5.4f") +  "% was covered " + i.ToString() + " times" to Sim_Report;
+	
 	revisittimesperpoints.PushBack(counter * i);
 End;
 
-TemporalRes = 1 / (analysisDuration * PointGroup2.Count) * revisittimesperpoints.Sum();
+TemporalRes = revisittimesperpoints.Sum() / (analysisDuration * PointGroup2.Count); 
 
-Report @"This simulation's Temporal Resolution: " + TemporalRes.ToString.Format("%5.2f") + "[#/days]" to Console;
+Report @"This simulation's Temporal Resolution [Expected Value / Initial Version]: " + TemporalRes.ToString.Format("%5.4f") + "[#/days]" to Console;
+Report @"This simulation's Mean Coverage Gap [Mean Value]: " + averagetimebetweenvisits.Mean.ToString.Format("%5.4f") + "[days]" to Console;
+Report @"This simulation's Maximum Average Time Gap: " + maxaveragetime.Mean.ToString.Format("%5.4f") + "[days] with a max of " + maxaveragetime.Max.ToString.Format("%5.4f") + "[days]" to Console;
+
 Report @"This simulation's Temporal Resolution: " + TemporalRes.ToString.Format("%5.2f") + "[#/days]" to Sim_Report;
+Report @"This simulation's Mean Coverage Gap [Mean Value]: " + averagetimebetweenvisits.Mean.ToString.Format("%5.4f") + "[days]" to Sim_Report;
+Report @"This simulation's Maximum Average Time Gap: " + maxaveragetime.Mean.ToString.Format("%5.4f") + "[days]" to Sim_Report;
 Report "" to Console;
 
-// define mejor el reporte del output para que sea mas legible el que y cuantos.
-
-// Puntos a definir: repasada ponderada de dias, cuanto es el porcentaje de puntos repasados X veces.]]></FreeFormScript>
+]]></FreeFormScript>
       </FreeForm>
     </ProjectCommands>
   </ProjectMissionSequence>
   <ProjectScript><![CDATA[// Input variables to be set by the user. These define the cluster and simulation's configuration.
 
-String TypeOfOrbit = "SSO";
+String TypeOfOrbit = "ISS";
 Variable F_axis = 6978; //[km] keplerian semi major axis
 Variable F_inclination = 97.87; //[°] keplerian orbit inclination
-Variable F_SCamount = 5; // Amount of satellites in the cluster
+Variable F_SCamount = 8; // Amount of satellites in the cluster
 Variable HalfWidth = 15.07; //[°] Half width angle
 Variable R_GSD = 50; // [m]
-Variable analysisDuration = 30; //[days] simulation runtime
+Variable analysisDuration = 2; //[days] simulation runtime
 // Create a Formation with 10 Spacecraft
 
 Variable i;
@@ -5303,7 +5329,7 @@ String GS_PuntaArenas = "Contact_Times_PuntaArenas_" + F_SCamount.ToString() + "
 String GS_Cuiaba = "Contact_Times_Cuiaba_" + F_SCamount.ToString() + "_" + TypeOfOrbit + "_" + F_axis.ToString() + "_" + F_inclination.ToString.Format("%5.2f") + "_" + analysisDuration.ToString() + "_days_R_GSD-" + R_GSD.ToString.Format("%5.2f")+".txt";
 String Shadow_Times = "Shadow_Times_" + F_SCamount.ToString() + "_" + TypeOfOrbit + "_" + F_axis.ToString() + "_" + F_inclination.ToString.Format("%5.2f") + "_" + analysisDuration.ToString() + "_days_R_GSD-" + R_GSD.ToString.Format("%5.2f")+".txt";
 String Report_Sim = "Sim_" + F_SCamount.ToString() + "_" + TypeOfOrbit + "_" + F_axis.ToString() + "_" + F_inclination.ToString.Format("%5.2f") + "_" + analysisDuration.ToString() + "_days_R_GSD-" + R_GSD.ToString.Format("%5.2f")+".txt";
-While (Walker_01.ElapsedTime < TIMESPAN(30 days));
+While (Walker_01.ElapsedTime < TIMESPAN(2 days));
 
 // Coverage analysis
 CoverageChange = PointGroup2.Coverage(scFormation, pointHasBeenCovered, totalNumberofRevisits);
@@ -5341,7 +5367,10 @@ Variable CovPercentage;
 
 
 
-revisit = totalNumberofRevisits[0:PointGroup2.Count-1];
+revisit = totalNumberofRevisits[0:PointGroup2.Count-1]; // https://ai-solutions.com/_help_Files/pointgroup_coverage_2_nanosecond.htm using statistics #1
+averagetimebetweenvisits = totalNumberofRevisits[PointGroup2.Count:2*PointGroup2.Count-1]; // https://ai-solutions.com/_help_Files/pointgroup_coverage_2_nanosecond.htm using statistics # 2
+maxaveragetime = totalNumberofRevisits[4*PointGroup2.Count:5*PointGroup2.Count-1]; // https://ai-solutions.com/_help_Files/pointgroup_coverage_2_nanosecond.htm using statistics #5
+
 
 ReportInterface Sim_Report;
 
@@ -5365,19 +5394,24 @@ For i=revisit.Min to revisit.Max;
 		End;
 	End;
 	CovPercentage = counter / PointGroup2.Count * 100;
-	Report CovPercentage.ToString.Format("%5.2f") +  "% was covered " + i.ToString() + " times" to Console;
-	Report CovPercentage.ToString.Format("%5.2f") +  "% was covered " + i.ToString() + " times" to Sim_Report;
+	
+	Report CovPercentage.ToString.Format("%5.4f") +  "% was covered " + i.ToString() + " times" to Console;
+	Report CovPercentage.ToString.Format("%5.4f") +  "% was covered " + i.ToString() + " times" to Sim_Report;
+	
 	revisittimesperpoints.PushBack(counter * i);
 End;
 
-TemporalRes = 1 / (analysisDuration * PointGroup2.Count) * revisittimesperpoints.Sum();
+TemporalRes = revisittimesperpoints.Sum() / (analysisDuration * PointGroup2.Count); 
 
-Report @"This simulation's Temporal Resolution: " + TemporalRes.ToString.Format("%5.2f") + "[#/days]" to Console;
+Report @"This simulation's Temporal Resolution [Expected Value / Initial Version]: " + TemporalRes.ToString.Format("%5.4f") + "[#/days]" to Console;
+Report @"This simulation's Mean Coverage Gap [Mean Value]: " + averagetimebetweenvisits.Mean.ToString.Format("%5.4f") + "[days]" to Console;
+Report @"This simulation's Maximum Average Time Gap: " + maxaveragetime.Mean.ToString.Format("%5.4f") + "[days] with a max of " + maxaveragetime.Max.ToString.Format("%5.4f") + "[days]" to Console;
+
 Report @"This simulation's Temporal Resolution: " + TemporalRes.ToString.Format("%5.2f") + "[#/days]" to Sim_Report;
+Report @"This simulation's Mean Coverage Gap [Mean Value]: " + averagetimebetweenvisits.Mean.ToString.Format("%5.4f") + "[days]" to Sim_Report;
+Report @"This simulation's Maximum Average Time Gap: " + maxaveragetime.Mean.ToString.Format("%5.4f") + "[days]" to Sim_Report;
 Report "" to Console;
 
-// define mejor el reporte del output para que sea mas legible el que y cuantos.
-
-// Puntos a definir: repasada ponderada de dias, cuanto es el porcentaje de puntos repasados X veces.]]></ProjectScript>
+]]></ProjectScript>
   <ProjectNotes></ProjectNotes>
 </FreeFlyerProjectFile>
