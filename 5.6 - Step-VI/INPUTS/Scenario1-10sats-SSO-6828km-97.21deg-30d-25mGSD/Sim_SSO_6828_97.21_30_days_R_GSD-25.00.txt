@@ -1,0 +1,62 @@
+
+   ("The total number of points inside the region are: " + PointGroup2.Count.ToString)
+                                           None
+                 The total number of points inside the region are: 40984
+
+   ((@"Propagating constellation for: " + analysisDuration.ToString) + " day(s)")
+                                        None
+                      Propagating constellation for: 30 day(s)
+
+   ("Type of Orbit: " + TypeOfOrbit)
+                  None
+          Type of Orbit: SSO
+
+   ("Semimajor Axis: " + F_axis.ToString)
+                    None
+            Semimajor Axis: 6828
+
+   ("Inclination: " + F_inclination.ToString.Format("%5.2f"))
+                              None
+                       Inclination: 97.21
+
+   ("Half Width: " + HalfWidth.ToString.Format("%5.2f"))
+                            None
+                     Half Width: 10.18
+
+   ("R_GSD implemented: " + R_GSD.ToString)
+                     None
+            R_GSD implemented: 25
+
+   (((CovPercentage.ToString.Format("%5.2f") + "% was covered") + i.ToString) + " times")
+                                            None
+                                  0.01% was covered25 times
+                                  0.03% was covered26 times
+                                  0.16% was covered27 times
+                                  0.59% was covered28 times
+                                  1.12% was covered29 times
+                                  1.75% was covered30 times
+                                  2.21% was covered31 times
+                                  2.25% was covered32 times
+                                  2.52% was covered33 times
+                                  4.14% was covered34 times
+                                  5.43% was covered35 times
+                                  7.37% was covered36 times
+                                  8.58% was covered37 times
+                                  7.88% was covered38 times
+                                  7.31% was covered39 times
+                                  6.53% was covered40 times
+                                  6.93% was covered41 times
+                                  7.98% was covered42 times
+                                  8.34% was covered43 times
+                                  7.28% was covered44 times
+                                  5.40% was covered45 times
+                                  3.43% was covered46 times
+                                  1.73% was covered47 times
+                                  0.77% was covered48 times
+                                  0.21% was covered49 times
+                                  0.03% was covered50 times
+                                  0.00% was covered51 times
+
+   ((@"This simulation's Temporal Resolution: " + TemporalRes.ToString.Format("%5.2f")) + "[#/days]")
+                                                  None
+                          This simulation's Temporal Resolution:  1.31[#/days]
