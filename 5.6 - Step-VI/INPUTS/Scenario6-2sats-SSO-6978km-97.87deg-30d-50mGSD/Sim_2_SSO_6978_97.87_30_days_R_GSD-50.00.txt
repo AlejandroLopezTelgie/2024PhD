@@ -1,0 +1,45 @@
+
+   ("The total number of points inside the region are: " + PointGroup2.Count.ToString)
+                                           None
+                 The total number of points inside the region are: 40984
+
+   ((@"Propagating constellation for: " + analysisDuration.ToString) + " day(s)")
+                                        None
+                      Propagating constellation for: 30 day(s)
+
+   ("Type of Orbit: " + TypeOfOrbit)
+                  None
+          Type of Orbit: SSO
+
+   ("Semimajor Axis: " + F_axis.ToString)
+                    None
+            Semimajor Axis: 6978
+
+   ("Inclination: " + F_inclination.ToString.Format("%5.2f"))
+                              None
+                       Inclination: 97.87
+
+   ("Half Width: " + HalfWidth.ToString.Format("%5.2f"))
+                            None
+                     Half Width: 15.07
+
+   ("R_GSD implemented: " + R_GSD.ToString)
+                     None
+            R_GSD implemented: 50
+
+   (((CovPercentage.ToString.Format("%5.2f") + "% was covered ") + i.ToString) + " times")
+                                             None
+                                  0.01% was covered 11 times
+                                  0.48% was covered 12 times
+                                  6.28% was covered 13 times
+                                 16.63% was covered 14 times
+                                 34.20% was covered 15 times
+                                 36.42% was covered 16 times
+                                  5.18% was covered 17 times
+                                  0.69% was covered 18 times
+                                  0.10% was covered 19 times
+                                  0.00% was covered 20 times
+
+   ((@"This simulation's Temporal Resolution: " + TemporalRes.ToString.Format("%5.2f")) + "[#/days]")
+                                                  None
+                          This simulation's Temporal Resolution:  0.51[#/days]

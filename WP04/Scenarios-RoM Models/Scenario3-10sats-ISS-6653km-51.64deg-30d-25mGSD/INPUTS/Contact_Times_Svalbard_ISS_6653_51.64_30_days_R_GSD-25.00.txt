@@ -1,0 +1,10 @@
+Svalbard --> Walker_1                    -- NO PASSES!
+Svalbard --> Walker_2                    -- NO PASSES!
+Svalbard --> Walker_3                    -- NO PASSES!
+Svalbard --> Walker_4                    -- NO PASSES!
+Svalbard --> Walker_5                    -- NO PASSES!
+Svalbard --> Walker_6                    -- NO PASSES!
+Svalbard --> Walker_7                    -- NO PASSES!
+Svalbard --> Walker_8                    -- NO PASSES!
+Svalbard --> Walker_9                    -- NO PASSES!
+Svalbard --> Walker_10                   -- NO PASSES!
